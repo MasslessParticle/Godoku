@@ -4,26 +4,26 @@ import (
 	"net/http"
 	"github.com/masslessparticle/sudokusolver/domain"
 	"encoding/json"
+	"github.com/masslessparticle/sudokusolver/db"
+	"strconv"
+	"github.com/gorilla/mux"
 )
 
 func SavePuzzleHandler() http.HandlerFunc {
 	return func(response http.ResponseWriter, request *http.Request) {
-		puzzle := domain.Puzzle{Id: 6}
+		request.ParseForm()
 
-		js, err := json.Marshal(puzzle)
-		if err != nil {
-			http.Error(response, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		puzzle := domain.Puzzle{Content: request.FormValue("puzzle")}
+		puzzleId := strconv.Itoa(db.InsertPuzzle(puzzle))
 
-		response.Header().Set("Content-Type", "application/json")
-		response.Write(js)
+		response.Write([]byte(puzzleId))
 	}
 }
 
 func GetPuzzleHandler() http.HandlerFunc {
 	return func(response http.ResponseWriter, request *http.Request) {
-		puzzle := domain.Puzzle{Id: 6, Content: "This is where the puzzle will go"}
+		id := mux.Vars(request)["id"]
+		puzzle := db.GetPuzzle(id)
 
 		js, err := json.Marshal(puzzle)
 		if err != nil {

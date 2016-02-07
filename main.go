@@ -5,9 +5,12 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"github.com/masslessparticle/sudokusolver/db"
 )
 
 func main() {
+	db.InitDB()
+
 	router := mux.NewRouter()
 
 	router.
