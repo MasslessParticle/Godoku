@@ -7,6 +7,8 @@ import (
 	"github.com/masslessparticle/sudokusolver/db"
 	"strconv"
 	"github.com/gorilla/mux"
+	"github.com/masslessparticle/sudokusolver/sudoku"
+	"fmt"
 )
 
 func SavePuzzleHandler() http.HandlerFunc {
@@ -20,10 +22,15 @@ func SavePuzzleHandler() http.HandlerFunc {
 	}
 }
 
-func GetPuzzleHandler() http.HandlerFunc {
+func GetPuzzleHandler(solved bool) http.HandlerFunc {
 	return func(response http.ResponseWriter, request *http.Request) {
 		id := mux.Vars(request)["id"]
 		puzzle := db.GetPuzzle(id)
+
+		if solved {
+			solved := sudoku.Solve(puzzle.Content)
+			puzzle.Content = fmt.Sprintf(solved.String())
+		}
 
 		js, err := json.Marshal(puzzle)
 		if err != nil {

@@ -17,10 +17,10 @@ func main() {
 	HandleFunc("/puzzle", SavePuzzleHandler()).
 	Methods("POST")
 	router.
-	HandleFunc("/puzzle/{id}", GetPuzzleHandler()).
+	HandleFunc("/puzzle/{id}", GetPuzzleHandler(false)).
 	Methods("GET")
 	router.
-	HandleFunc("/solved/{id}", GetPuzzleHandler()).
+	HandleFunc("/solved/{id}", GetPuzzleHandler(true)).
 	Methods("GET")
 	router.
 	HandleFunc("/", BasicResponseHandler()).
