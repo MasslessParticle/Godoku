@@ -1,4 +1,4 @@
-# goduku
+# Godoku
 A small application to solve sudoku puzzles via a RESTful API 
 
 Godoku is a learning exercise so it does woefully little validation or error handing.
