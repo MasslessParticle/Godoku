@@ -1,14 +1,14 @@
 package main
 
 import (
-	"net/http"
-	"github.com/masslessparticle/sudokusolver/domain"
 	"encoding/json"
-	"github.com/masslessparticle/sudokusolver/db"
-	"strconv"
-	"github.com/gorilla/mux"
-	"github.com/masslessparticle/sudokusolver/sudoku"
 	"fmt"
+	"github.com/masslessparticle/sudokusolver/Godeps/_workspace/src/github.com/gorilla/mux"
+	"github.com/masslessparticle/sudokusolver/db"
+	"github.com/masslessparticle/sudokusolver/domain"
+	"github.com/masslessparticle/sudokusolver/sudoku"
+	"net/http"
+	"strconv"
 )
 
 func SavePuzzleHandler() http.HandlerFunc {

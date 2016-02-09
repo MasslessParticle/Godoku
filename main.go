@@ -1,11 +1,12 @@
 package main
+
 import (
-	"github.com/gorilla/mux"
-	"net/http"
 	"fmt"
-	"log"
-	"os"
+	"github.com/masslessparticle/sudokusolver/Godeps/_workspace/src/github.com/gorilla/mux"
 	"github.com/masslessparticle/sudokusolver/db"
+	"log"
+	"net/http"
+	"os"
 )
 
 func main() {
@@ -14,17 +15,17 @@ func main() {
 	router := mux.NewRouter()
 
 	router.
-	HandleFunc("/puzzle", SavePuzzleHandler()).
-	Methods("POST")
+		HandleFunc("/puzzle", SavePuzzleHandler()).
+		Methods("POST")
 	router.
-	HandleFunc("/puzzle/{id}", GetPuzzleHandler(false)).
-	Methods("GET")
+		HandleFunc("/puzzle/{id}", GetPuzzleHandler(false)).
+		Methods("GET")
 	router.
-	HandleFunc("/solved/{id}", GetPuzzleHandler(true)).
-	Methods("GET")
+		HandleFunc("/solved/{id}", GetPuzzleHandler(true)).
+		Methods("GET")
 	router.
-	HandleFunc("/", BasicResponseHandler()).
-	Methods("GET")
+		HandleFunc("/", BasicResponseHandler()).
+		Methods("GET")
 
 	if err := http.ListenAndServe(fmt.Sprintf(":%v", getPort()), router); err != nil {
 		log.Fatalln(err)

@@ -1,0 +1,7 @@
+---
+applications:
+  - name: sudokusolver
+    memory: 256M
+    instances: 1
+    services:
+      - mysql
